@@ -208,7 +208,7 @@ export const sortingAlgorithms = {
       for (let i = 0; i < newArr.length; i++) {
         newArr[i] = output[i];
         onSwap([...newArr]);
-        await delay(0);
+        await delay(1000);
       }
     }
 
@@ -234,7 +234,7 @@ export const sortingAlgorithms = {
           newArr.push(num);
           if (onSwap) {
             onSwap([...newArr]);
-            await delay(0);
+            await delay(1000);
           }
         }
       }

@@ -2,11 +2,8 @@
 import React, { useState } from "react";
 import Visualiser from "../components/visualiser";
 import { sortingAlgorithms } from "../utils/sortingAlgorithms";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 const Home: React.FC = () => {
-  const [showWarning, setShowWarning] = useState(true);
   const [algorithm, setAlgorithm] =
     useState<keyof typeof sortingAlgorithms>("bubbleSort");
   const [condition, setCondition] = useState("Random");
@@ -26,7 +23,6 @@ const Home: React.FC = () => {
   };
 
   const handleStart = () => {
-    setShowWarning(false);
     setArray(generateScrambledArray(n, condition));
   };
 
@@ -45,11 +41,11 @@ const Home: React.FC = () => {
         <select
           className="border border-gray-300 p-4 py-2 mx-4 rounded-md bg-white text-black"
           value={algorithm}
-          onChange={(e) =>
+          onChange={e =>
             setAlgorithm(e.target.value as keyof typeof sortingAlgorithms)
           }
         >
-          {Object.keys(sortingAlgorithms).map((alg) => (
+          {Object.keys(sortingAlgorithms).map(alg => (
             <option key={alg} value={alg}>
               {alg}
             </option>
@@ -60,7 +56,7 @@ const Home: React.FC = () => {
 
         <select
           className="border border-gray-300 p-4 py-2 mx-4 rounded-md bg-white text-black"
-          onChange={(e) => setCondition(e.target.value)}
+          onChange={e => setCondition(e.target.value)}
         >
           <option value="Random">Random</option>
           <option value="Reverse">Reverse</option>
@@ -73,7 +69,7 @@ const Home: React.FC = () => {
           min="3"
           max="10"
           value={n}
-          onChange={(e) => setN(parseInt(e.target.value))}
+          onChange={e => setN(parseInt(e.target.value))}
         />
       </div>
       <div className="flex justify-center my-4 w-full">
@@ -90,20 +86,7 @@ const Home: React.FC = () => {
           Clear
         </button>
       </div>
-      {showWarning && (
-        <div className="text-black border border-black rounded-lg bg-white p-4 mx-6 my-6 lg:my-20 lg:mx-20">
-          <FontAwesomeIcon
-            icon={faTriangleExclamation}
-            className="text-4xl text-yellow-500 mb-4"
-          />
-          <h2 className="text-2xl font-bold mb-4">{"Warning"}</h2>
-          <p className="mb-6">
-            {
-              "This visualiser contains rapid animations that may be harmful to individuals with photosensitive epilepsy or other conditions that can be triggered by flashing lights. Viewer discretion is advised"
-            }
-          </p>
-        </div>
-      )}
+
       <Visualiser array={array} algorithm={algorithm} />
     </div>
   );
